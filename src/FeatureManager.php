@@ -8,7 +8,7 @@ final class FeatureManager
 {
     public function enabled(/* ... */): mixed
     {
-        return null;
+        return $this;
     }
     public function for(/* ... */): mixed
     {
