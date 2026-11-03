@@ -1,2 +1,2 @@
 <?php
-return return ['error_flag' => 'Flag نامعتبر.'];;
+return ['error_flag' => 'Flag نامعتبر.'];
