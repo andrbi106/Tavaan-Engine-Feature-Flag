@@ -6,35 +6,35 @@ namespace Tavaan\Engine\FeatureFlag;
 
 final class FeatureManager
 {
-    public function enabled(/* ... */): mixed
-    {
-        return $this;
-    }
-    public function for(/* ... */): mixed
+    public function enabled()
     {
         return null;
     }
-    public function value(/* ... */): mixed
+    public function for()
     {
         return null;
     }
-    public function define(/* ... */): mixed
+    public function value()
     {
         return null;
     }
-    public function kill(/* ... */): mixed
+    public function define()
     {
         return null;
     }
-    public function revive(/* ... */): mixed
+    public function kill()
     {
         return null;
     }
-    public function experiment(/* ... */): mixed
+    public function revive()
     {
         return null;
     }
-    public function percentage(/* ... */): mixed
+    public function experiment()
+    {
+        return null;
+    }
+    public function percentage()
     {
         return null;
     }
