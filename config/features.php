@@ -2,27 +2,35 @@
 
 declare(strict_types=1);
 
-/*
- * تَوان | Tavaan — FeatureFlag
- * config/features.php — پیکربندی پرچم‌های قابلیت (DOC-075 §6).
+/*|--------------------------------------------------------------------------
+ | Feature-Flag Engine Configuration
+ |--------------------------------------------------------------------------
+ |
+ | پیکربندی موتور feature-flag — همهٔ کلیدهای مستندشده در `docs/03-engines/feature-flag.md` بخش «پیکربندی».
+ |
+ |@see https://github.com/Derogaramin/Tavaan-Doc/blob/main/docs/03-engines/feature-flag.md
  */
 
 return [
-    // config|database
-    'driver' => env_string('TVN_FEATURE_DRIVER', 'config'),
+    /*| پیش‌فرض موتور (driver/store یا حالت فعال) */
+    'default' => env('FEATURE-FLAG_DEFAULT', 'default'),
 
-    // ttl کش تعاریف DB (ثانیه)
-    'cache_ttl' => env_int('TVN_FEATURE_CACHE_TTL', 60),
+    /*| کلید کش (در صورت استفاده) */
+    'prefix' => env('FEATURE-FLAG_PREFIX', 'feature-flag:'),
 
-    // 🔒 نسخهٔ کلید cache — با تغییر آن، همهٔ کش‌های تعاریف باطل می‌شوند
-    'version' => 'v1',
+    /*| تنظیمات لاگ */
+    'log' => [
+        'channel' => env('FEATURE-FLAG_LOG_CHANNEL', 'feature-flag'),
+    ],
 
-    // جدول درایور database
-    'table' => 'tvn_features',
+    /*| Facade */
+    'facade' => [
+        'name' => 'Feature',
+        'accessor' => 'feature',
+    ],
 
-    'features' => [
-        // 'shop.gift-card' => ['enabled' => false, 'default' => false, 'rules' => []],
-        // 'new.checkout' => ['enabled' => true, 'rules' => [['type' => 'percentage', 'value' => 10]]],
-        // 'theme.color' => ['enabled' => true, 'default' => true, 'value' => 'blue'],
+    /*| سایر کلیدها (طبق مستندات) */
+    'options' => [
+        // TODO: کلیدهای اضافی طبق سند §۶ (پیکربندی)
     ],
 ];
