@@ -36,5 +36,6 @@
     "accessor": "feature"
   },
   "docs": "docs/03-engines/feature-flag.md",
-  "notes": "M6 — Targeting با قواعد role/permission/user_id/tenant/percentage/env/ip، Kill Switch فوری (cache)، درصد پایدار (crc32(seed|feature))، A/B Testing پایدار، درایورهای config/database با کش نسخه‌دار، Feature::for($user) scoped."
+  "notes": "M6 — Targeting با قواعد role/permission/user_id/tenant/percentage/env/ip، Kill Switch فوری (cache)، درصد پایدار (crc32(seed|feature))، A/B Testing پایدار، درایورهای config/database با کش نسخه‌دار، Feature::for($user) scoped.",
+  "class": "Tavaan\\Engine\\FeatureFlag\\FeatureFlagEngine"
 }

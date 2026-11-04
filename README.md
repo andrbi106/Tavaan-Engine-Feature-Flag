@@ -2,6 +2,8 @@
 
 > **پرچم قابلیت** — موتور FeatureFlag در فریمورک تَوان
 
+این موتور از کلاس پایهٔ `Engine` (در [Tavaan-Engine-Core](https://github.com/andrbi106/Tavaan-Engine-Core)) ارث می‌برد.
+
 ## مشخصات
 
 | فیلد | مقدار |
@@ -11,64 +13,66 @@
 | عنوان فارسی | پرچم قابلیت |
 | نسخه | `0.1.0` |
 | namespace | `Tavaan\Engine\FeatureFlag` |
-| نوع | `engine` |
-| Facade | `Feature` (accessor: `feature`) |
+| کلاس موتور | `Tavaan\Engine\FeatureFlag\FeatureFlagEngine` |
+| Facade | Feature (`feature`) |
+
+## کلاس موتور
+
+```php
+namespace Tavaan\Engine\FeatureFlag;
+
+use Tavaan\EngineCore\Engine as BaseEngine;
+use Tavaan\EngineCore\Contracts\EngineManifestInterface;
+
+final class FeatureFlagEngine extends BaseEngine
+{
+    public function __construct(EngineManifestInterface $manifest)
+    {
+        parent::__construct($manifest);
+    }
+
+    public function register(ContainerInterface $container): void
+    {
+        parent::register($container);
+        // bindingهای اختصاصی موتور
+    }
+
+    public function boot(): void
+    {
+        parent::boot();
+    }
+}
+```
+
+**فایل:** `src/FeatureFlagEngine.php`
 
 ## توضیحات
 
 M6 — Targeting با قواعد role/permission/user_id/tenant/percentage/env/ip، Kill Switch فوری (cache)، درصد پایدار (crc32(seed|feature))، A/B Testing پایدار، درایورهای config/database با کش نسخه‌دار، Feature::for($user) scoped.
 
-## Facadeها
+## وابستگی‌ها
 
-- `Tavaan\Engine\FeatureFlag\Facades\Feature`
+**موتورهای مورد‌نیاز:** `config`
 
-## کلاس‌های اصلی
-
-- `src/FeatureEvaluator.php`
-- `src/FeatureFlagResolver.php`
-- `src/FeatureManager.php`
-- `src/ScopedFeature.php`
-- `src/feature_flag.php`
+**موتورهای اختیاری:** `cache`, `database`, `rbac`, `tenancy`
 
 ## Service Providerها
 
 - `Tavaan\Engine\FeatureFlag\FeatureManagerServiceProvider`
 
-## وابستگی‌ها
+## سه درگاه ارتباط با سایر موتورها
 
-**موتورهای مورد‌نیاز:**
-
-- `config`
-
-**موتورهای اختیاری:**
-
-- `cache`
-- `database`
-- `rbac`
-- `tenancy`
-
-## پیکربندی
-
-- فایل پیکربندی: `config/features.php`
-- کلید: `features`
+| درگاه | الگو | متدهای convenience |
+|---|---|---|
+| Container | pull-based DI | `make()`, `bound()` |
+| Events | pub/sub | `dispatch()`, `listen()` |
+| EngineBus | point-to-point RPC | `call()`, `offer()` |
 
 ## نصب
 
 ```bash
 git clone https://github.com/andrbi106/Tavaan-Engine-Feature-Flag.git
 ```
-
-این موتور بخشی از فریمورک تَوان است و معمولاً به‌صورت مستقیم نصب نمی‌شود،
-بلکه توسط [Tavaan-Core](https://github.com/andrbi106/Tavaan-Core) مدیریت می‌شود.
-
-## روابط با سایر مخازن
-
-| مخزن | نقش |
-|---|---|
-| **`andrbi106/Tavaan-Engine-Feature-Flag`** (این مخزن) | موتور FeatureFlag |
-| `andrbi106/Tavaan-Engine-Core` | ساختار پایه + درگاه ارتباط موتورها |
-| `andrbi106/Tavaan-Core` | اسکلت اپلیکیشن + همهٔ موتورها |
-| `Derogaramin/Tavaan-Framework` | فریمورک مادر (monorepo) |
 
 ## مجوز
 
